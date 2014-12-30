@@ -36,6 +36,8 @@ private:
     std::unordered_map<EdgeId, Edge> edges;
 
     static inline int pos(int orig, int dest, int size);
+    inline Edge& getEdge(EdgeId eId);
+    inline const Edge& getEdge(EdgeId eId) const;
 public:
     // adj_matrix es un array de tamaño size*size que representa
     // la matriz de adyacencia. Dónde adj_matrix[x+y*size]
@@ -45,10 +47,8 @@ public:
     ~Graph();
 
     // Vertex stuff
-    int getVertexNeighbourId(int id, int i) const;
-    int getVertexNumNeighbours(int id) const;
-    std::vector<EdgeId> getVertexInnerEdges(int id) const;
-    std::vector<EdgeId> getVertexOuterEdges(int id) const;
+    const std::vector<EdgeId>& getVertexInwardEdges(int id) const;
+    const std::vector<EdgeId>& getVertexOutwardEdges(int id) const;
 
     // Edge stuff
     int getEdgeOrigin(EdgeId eId) const;

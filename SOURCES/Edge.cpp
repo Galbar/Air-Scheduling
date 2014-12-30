@@ -14,25 +14,30 @@ Edge::~Edge ()
 
 int Edge::getOrigin () const
 {
-	return origin;
+    return origin;
 }
 
 int Edge::getDestination () const
 {
-	return destination;
+    return destination;
 }
 
 int Edge::getCapacity () const
 {
-	return capacity;
+    return capacity;
 }
 
 int Edge::getFlow () const
 {
-	return flow;
+    return flow;
 }
 
 void Edge::setFlow (int new_flow)
 {
-	flow = new_flow;
+    flow = new_flow;
+}
+
+int Edge::getResidualFlow() const
+{
+    return capacity - flow;
 }

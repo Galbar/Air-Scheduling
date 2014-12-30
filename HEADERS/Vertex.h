@@ -1,18 +1,23 @@
 #ifndef VERTEX_H
 #define VERTEX_H
-#include <initializer_list>
 #include <vector>
 
+typedef std::pair<int, int> EdgeId;
 
 class Vertex
 {
+    friend class Graph;
+private:
+    std::vector<EdgeId> inwardEdges;
+    std::vector<EdgeId> outwardEdges;
+
+    void addInwardEdge(EdgeId eId);
+    void addOutwardEdge(EdgeId eId);
 public:
-	// Vertex v = {2, 3, 5, 8} -> v tiene como vecinos los vertices 2, 3, 5, 8
-	Vertex(std::initializer_list<int> adj_list);
-	Vertex(std::vector<int> adj_list);
-	~Vertex();
-	
-	int getNeighbour(int i);
-	int getNumNeighbours();
+    Vertex();
+    ~Vertex();
+
+    const std::vector<EdgeId>& getInwardEdges() const;
+    const std::vector<EdgeId>& getOutwardEdges() const;
 };
 #endif

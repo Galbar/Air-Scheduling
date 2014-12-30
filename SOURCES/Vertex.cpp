@@ -1,11 +1,6 @@
 #include "Vertex.h"
 
-Vertex::Vertex(std::initializer_list<int> adj_list)
-{
-
-}
-
-Vertex::Vertex(std::vector<int> adj_list)
+Vertex::Vertex()
 {
 
 }
@@ -15,12 +10,22 @@ Vertex::~Vertex()
 
 }
 
-int Vertex::getNeighbour(int i)
+void Vertex::addInwardEdge(EdgeId eId)
 {
-	return 0;
+    inwardEdges.push_back(eId);
 }
 
-int Vertex::getNumNeighbours()
+void Vertex::addOutwardEdge(EdgeId eId)
 {
-	return 0;
+    outwardEdges.push_back(eId);
+}
+
+const std::vector<EdgeId>& Vertex::getInwardEdges() const
+{
+    return inwardEdges;
+}
+
+const std::vector<EdgeId>& Vertex::getOutwardEdges() const
+{
+    return outwardEdges;
 }
