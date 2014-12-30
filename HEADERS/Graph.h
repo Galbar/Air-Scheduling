@@ -32,6 +32,7 @@ typedef std::pair<int, int> EdgeId;
 class Graph
 {
 private:
+	int source, sink;
     std::vector<Vertex> vertex;
     std::unordered_map<EdgeId, Edge> edges;
 
@@ -43,7 +44,7 @@ public:
     // la matriz de adyacencia. Dónde adj_matrix[x+y*size]
     // es el valor de la capacidad del arco que va de x a y
     // (si es 0 no hay arco)
-    Graph(int adj_matrix[], int size);
+    Graph(int adj_matrix[], int size, int source, int sink);
     ~Graph();
 
     // Vertex stuff
@@ -60,6 +61,8 @@ public:
     void setEdgeFlow(EdgeId eId, int new_flow);
 
     // Graph stuff
+    int getSource() const;
+    int getSink() const;
     int getNumVertex() const;
     int getNumEdges() const;
     void getAdjacencyMatrix(int mat[]);

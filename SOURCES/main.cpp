@@ -33,21 +33,26 @@ int main ()
     }
 
     std::cout << std::endl;
-    Graph g = Graph(adj_matrix, size);
+    Graph g = Graph(adj_matrix, size, 0, 4);
     int s = g.getNumVertex();
 
     for (int i = 0; i < s; ++i)
     {
         std::vector<EdgeId> inward = g.getVertexInwardEdges(i);
         std::vector<EdgeId> outward = g.getVertexOutwardEdges(i);
-        std::cout << "Vertex " << i << ":" << std::endl;
+        std::cout << "Vertex " << i;
+        if (i == g.getSink())
+            std::cout << " (sink)";
+        if (i == g.getSource())
+            std::cout << " (source)";
+        std::cout << ":" << std::endl;
         std::cout << "\tInward: ";
-        for (int j = 0; j < inward.size(); ++j)
+        for (unsigned int j = 0; j < inward.size(); ++j)
         {
             std::cout << "(" << inward[j].first << "->" << inward[j].second << ", " << g.getEdgeFlow(inward[j]) << "/" << g.getEdgeCapacity(inward[j]) << ") ";
         }
         std::cout << std::endl << "\tOutward: ";
-        for (int j = 0; j < outward.size(); ++j)
+        for (unsigned int j = 0; j < outward.size(); ++j)
         {
             std::cout << "(" << outward[j].first << "->" << outward[j].second << ", " << g.getEdgeFlow(outward[j]) << "/" << g.getEdgeCapacity(outward[j]) << ") ";
         }

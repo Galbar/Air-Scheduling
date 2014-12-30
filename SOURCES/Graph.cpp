@@ -1,7 +1,9 @@
 #include <iostream>
 #include "Graph.h"
 
-Graph::Graph (int adj_matrix[], int size)
+Graph::Graph (int adj_matrix[], int size, int source, int sink):
+source(source),
+sink(sink)
 {
     vertex = std::vector<Vertex>(size);
     for (int i = 0; i < size; ++i)
@@ -82,6 +84,17 @@ void Graph::setEdgeFlow(EdgeId eId, int new_flow)
 }
 
 // Graph stuff
+
+int Graph::getSource() const
+{
+    return source;
+}
+
+int Graph::getSink() const
+{
+    return sink;
+}
+
 int Graph::getNumVertex () const
 {
     return vertex.size();
