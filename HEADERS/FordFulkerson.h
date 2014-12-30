@@ -1,22 +1,23 @@
+#ifndef FORDFULKERSON_H
+#define FORDFULKERSON_H
 #include <iostream>
 #include <vector>
+#include <queue>
 #include "Graph.h"
 
 class FordFulkerson{
 	public:
-		Graph solve(Graph G);
-
-
-
-		FordFulkerson::FordFulkerson();
-		FordFulkerson::~FordFulkerson();
+		FordFulkerson(const Graph& graph);
+		~FordFulkerson();
 	
-		bool ff(Graph& G);
-
+		void ff();
+		const Graph& getResult();
 	private:
-		bool bfs(Graph& G, vector<int>& parent);
-		void augment(Graph& G, vector<int>& parent);
-		int getBottleneck(Graph& G, vector<int>& parent);
-		bool isMaxFlow(Graph& G);
+		Graph G;
+		bool bfs(std::vector<int>& parent);
+		void augment(std::vector<int>& parent);
+		int getBottleneck(std::vector<int>& parent);
+		bool isMaxFlow();
 
 };
+#endif

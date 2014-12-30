@@ -11,7 +11,7 @@ LIBS      =
 EXEC      = air-scheduling
 
 MAIN      = main
-CLASSES   = Vertex Edge Graph
+CLASSES   = Vertex Edge Graph FordFulkerson
 DEFS      = 
 
 DEPS      = $(patsubst %, $(IDIR)/%.h,$(DEFS)) $(patsubst %, $(IDIR)/%.h,$(CLASSES))
