@@ -38,5 +38,14 @@ int main ()
     {
         printEdge(eId);
     }
+    if (fed.isFlight(EdgeId(2, 1)))
+        std::cout << "Error!" << std::endl;
+    else
+        std::cout << "Todo va OK" << std::endl;
+
+    if (fed.isFlight(EdgeId(2, 3)))
+        std::cout << "Todo va OK" << std::endl;
+    else
+        std::cout << "Error!" << std::endl;
     return 0;
 }
