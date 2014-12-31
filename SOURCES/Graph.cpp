@@ -31,12 +31,12 @@ int Graph::pos(int orig, int dest, int size)
     return orig + dest * size;
 }
 
-const Edge& Graph::getEdge(EdgeId eId) const
+const Edge& Graph::getEdge(const EdgeId& eId) const
 {
     return edges.find(eId)->second;
 }
 
-Edge& Graph::getEdge(EdgeId eId)
+Edge& Graph::getEdge(const EdgeId& eId)
 {
     return edges.find(eId)->second;
 }
@@ -53,32 +53,32 @@ const std::vector<EdgeId>& Graph::getVertexOutwardEdges(int id) const
 }
 
 // Edge stuff
-int Graph::getEdgeOrigin(EdgeId eId) const
+int Graph::getEdgeOrigin(const EdgeId& eId) const
 {
     return getEdge(eId).getOrigin();
 }
 
-int Graph::getEdgeDestination(EdgeId eId) const
+int Graph::getEdgeDestination(const EdgeId& eId) const
 {
     return getEdge(eId).getDestination();
 }
 
-int Graph::getEdgeCapacity(EdgeId eId) const
+int Graph::getEdgeCapacity(const EdgeId& eId) const
 {
     return getEdge(eId).getCapacity();
 }
 
-int Graph::getEdgeFlow(EdgeId eId) const
+int Graph::getEdgeFlow(const EdgeId& eId) const
 {
     return getEdge(eId).getFlow();
 }
 
-int Graph::getEdgeResidualFlow(EdgeId eId) const
+int Graph::getEdgeResidualFlow(const EdgeId& eId) const
 {
     return getEdge(eId).getResidualFlow();
 }
 
-void Graph::setEdgeFlow(EdgeId eId, int new_flow)
+void Graph::setEdgeFlow(const EdgeId& eId, int new_flow)
 {
     getEdge(eId).setFlow(new_flow);
 }
@@ -121,7 +121,7 @@ void Graph::getAdjacencyMatrix(int mat[])
     }
 }
 
-bool Graph::edgeExists(EdgeId eId) const
+bool Graph::edgeExists(const EdgeId& eId) const
 {
     return (edges.find(eId) != edges.end());
 }

@@ -12,9 +12,9 @@ EXEC      = air-scheduling
 
 MAIN      = main
 
-CLASSES   = Vertex Edge Graph Flight FordFulkerson
+CLASSES   = Vertex Edge Graph Flight FlightEdgeDict FordFulkerson
 
-DEFS      = 
+DEFS      = hash_pair
 
 DEPS      = $(patsubst %, $(IDIR)/%.h,$(DEFS)) $(patsubst %, $(IDIR)/%.h,$(CLASSES))
 OBJ       = $(patsubst %, $(ODIR)/%.o,$(MAIN)) $(patsubst %, $(ODIR)/%.o,$(CLASSES))
