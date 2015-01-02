@@ -17,31 +17,33 @@ void ReadGraph::read(){
 }
 
 void ReadGraph::makeAdjMatrix(){
-	adjMatrix=std::vector<constraints>((2*numFlights+2)*(2*numFlights+2),std::make_pair(0,0));
+	int n = 2*numFlights+2;
+	adjMatrix=std::vector<constraints>((n)*(n),std::make_pair(0,0));
 
-	weights = std::vector<int>(2*numFlights+2,0);
+	weights = std::vector<int>(n,0);
 
 
-	for(int i = 1; i < numFlights+1; i+=2){
+	for(int i = 0; i < n-2; i+=2){
 		adjMatrix[pos(i,i+1)] = constraints(1,1);
 	}
-
-	for(int i = 1; i < numFlights+1; ++i){
-		for(int j = 1; j < numFlights+1; ++j){
-			if(flights[i-1].getDestination() == flights[j-1].getOrigin()
-				and flights[i-1].getArrivalTime()+15 < flights[j-1].getTakeoffTime()){
+	for(int i = 0; i < numFlights; ++i){
+		for(int j = 0; j < numFlights; ++j){
+			if(flights[i].getDestination() == flights[j].getOrigin()
+				and flights[i].getArrivalTime()+15 < flights[j].getTakeoffTime()){
 				adjMatrix[pos(2*i+1,2*j)] = constraints(0,1);
 			}
 		}
 	}
+	
 
-
-	for(int i = 2; i < numFlights*2; i+=2){
+	for(int i = 0; i < n-2; i+=2){
 		
-		adjMatrix[pos(0,i)] = constraints(0,1);
-		adjMatrix[pos(2*numFlights+1,i+1)] = constraints(0,1);
+		adjMatrix[pos(n-2,i)] = constraints(0,1);
 	}
+	for(int i = 0; i < n-2; i+=2){
+		adjMatrix[pos(i+1,n-1)] = constraints(0,1);
 
+	}
 }
 
 int ReadGraph::pos(int i, int j){
@@ -54,8 +56,17 @@ const std::vector<Flight>& ReadGraph::getFlights(){
 	return flights;
 }
 
+int ReadGraph::getNumFlights(){
+	return numFlights;
+}
+
 const std::vector<int>& ReadGraph::getAdjMatrix(){
 	return adj;
+}
+
+
+const std::vector<constraints>& ReadGraph::getRawAdjMatrix(){
+	return adjMatrix;
 }
 
 int ReadGraph::getSize(){

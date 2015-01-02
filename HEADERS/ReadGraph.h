@@ -31,9 +31,11 @@ public:
 
 	const std::vector<Flight>& getFlights();
 	const std::vector<int>& getAdjMatrix();
+	const std::vector<constraints>& getRawAdjMatrix();
 	int getSize();
 	int getSource();
 	int getSink();
+	int getNumFlights();
 
 
 	void parametrize(int k);
