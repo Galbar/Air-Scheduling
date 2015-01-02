@@ -1,11 +1,11 @@
-#include "FordFulkerson.h"
+#include "EdmondsKarp.h"
 
-FordFulkerson::FordFulkerson(const Graph& graph):G(graph){
+EdmondsKarp::EdmondsKarp(const Graph& graph):G(graph){
 }
 
-FordFulkerson::~FordFulkerson(){}
+EdmondsKarp::~EdmondsKarp(){}
 
-bool FordFulkerson::bfs(std::vector<int>& parent){
+bool EdmondsKarp::bfs(std::vector<int>& parent){
 	int s = G.getSource();
 	std::vector<bool> visited(G.getNumVertex(),false);
 
@@ -48,7 +48,7 @@ bool FordFulkerson::bfs(std::vector<int>& parent){
 	return visited[G.getSink()];
 }
 
-void FordFulkerson::augment(std::vector<int>& parent){
+void EdmondsKarp::augment(std::vector<int>& parent){
 	int x = getBottleneck(parent);
 	int v = G.getSink();
 	while(parent[v] != -1){
@@ -66,7 +66,7 @@ void FordFulkerson::augment(std::vector<int>& parent){
 }
 
 
-int FordFulkerson::getBottleneck(std::vector<int>& parent){
+int EdmondsKarp::getBottleneck(std::vector<int>& parent){
 	int bottleneck = 0;
 	int v = G.getSink();
 	while(parent[v] != -1){
@@ -86,7 +86,7 @@ int FordFulkerson::getBottleneck(std::vector<int>& parent){
 }
 
 
-bool FordFulkerson::isMaxFlow(){
+bool EdmondsKarp::isMaxFlow(){
 	int t = G.getSink();
 	std::vector<EdgeId> incident = G.getVertexInwardEdges(t);
 	for(unsigned int u = 0; u < incident.size(); ++u){
@@ -97,13 +97,13 @@ bool FordFulkerson::isMaxFlow(){
 	return true;
 }
 
-void FordFulkerson::ff(){
+void EdmondsKarp::ff(){
 	std::vector<int> parent(G.getNumVertex());
 	while(bfs(parent)){
 		augment(parent);
 	}
 }
 
-const Graph& FordFulkerson::getResult(){
+const Graph& EdmondsKarp::getResult(){
 	return G;
 }

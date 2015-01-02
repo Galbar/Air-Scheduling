@@ -1,14 +1,14 @@
-#ifndef FORDFULKERSON_H
-#define FORDFULKERSON_H
+#ifndef EDMONDSKARP_H
+#define EDMONDSKARP_H
 #include <iostream>
 #include <vector>
 #include <queue>
 #include "Graph.h"
 
-class FordFulkerson{
+class EdmondsKarp{
 public:
-	FordFulkerson(const Graph& graph);
-	~FordFulkerson();
+	EdmondsKarp(const Graph& graph);
+	~EdmondsKarp();
 
 	void ff();
 	const Graph& getResult();
