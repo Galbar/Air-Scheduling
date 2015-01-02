@@ -12,7 +12,7 @@ EXEC      = air-scheduling
 
 MAIN      = main
 
-CLASSES   = Vertex Edge Graph Flight FlightEdgeDict FordFulkerson
+CLASSES   = Vertex Edge Graph Flight FlightEdgeDict FordFulkerson ReadGraph
 
 DEFS      = hash_pair
 

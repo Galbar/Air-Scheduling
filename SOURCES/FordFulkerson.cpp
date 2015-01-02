@@ -1,6 +1,6 @@
 #include "FordFulkerson.h"
 
-FordFulkerson::FordFulkerson(Graph& graph):G(graph){
+FordFulkerson::FordFulkerson(const Graph& graph):G(graph){
 }
 
 FordFulkerson::~FordFulkerson(){}
@@ -21,7 +21,7 @@ bool FordFulkerson::bfs(std::vector<int>& parent){
 
 		std::vector<EdgeId> neighbors = G.getVertexOutwardEdges(u);
 		std::vector<EdgeId> residual = G.getVertexInwardEdges(u);
-		for(int i = 0; i < neighbors.size(); ++i){
+		for(unsigned int i = 0; i < neighbors.size(); ++i){
 			EdgeId e = neighbors[i];
 			int v = G.getEdgeDestination(e);
 			if(not visited[v]){
@@ -32,7 +32,7 @@ bool FordFulkerson::bfs(std::vector<int>& parent){
 				}
 			}
 		}
-		for(int i = 0; i < residual.size(); ++i){
+		for(unsigned int i = 0; i < residual.size(); ++i){
 			EdgeId e = neighbors[i];
 			int v = G.getEdgeOrigin(e);
 			if(not visited[v]){
@@ -89,7 +89,7 @@ int FordFulkerson::getBottleneck(std::vector<int>& parent){
 bool FordFulkerson::isMaxFlow(){
 	int t = G.getSink();
 	std::vector<EdgeId> incident = G.getVertexInwardEdges(t);
-	for(int u = 0; u < incident.size(); ++u){
+	for(unsigned int u = 0; u < incident.size(); ++u){
 		if(G.getEdgeResidualFlow(incident[u]) > 0){
 			return false;
 		}
