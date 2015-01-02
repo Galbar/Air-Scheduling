@@ -28,4 +28,21 @@ int main(){
 		std::cout << std::endl;
 	}
 
+
+	int k = 2;
+	rd.parametrize(k);
+	int n = rd.getSize();
+
+	std::cout << "size: " << n << std::endl;
+	std::cout << "source: " << rd.getSource() << std::endl;
+	std::cout << "sink: " << rd.getSink() << std::endl;
+	std::cout << "number of flights: "<<rd.getNumFlights() << std::endl;
+ 	std::cout << "Parametrized adjacency matrix with k = " << k << std::endl;
+	std::vector<int> x = rd.getAdjMatrix();
+	for(int i = 0; i < n; ++i){
+		for(int j = 0; j < n; ++j){
+			std::cout << x[i*n+j] << ' ';
+		}
+		std::cout << std::endl;
+	}
 }

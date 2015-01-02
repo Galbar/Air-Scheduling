@@ -83,7 +83,7 @@ int ReadGraph::getSource(){
 
 void ReadGraph::parametrize(int k){
 	weights = std::vector<int>(2*numFlights+4,0);
-	weights[0] = -k;
+	weights[2*numFlights] = -k;
 	weights[2*numFlights+1] = k;
 	int n = 2*numFlights+4;
 	adj = std::vector<int>(n*n);
@@ -99,18 +99,17 @@ void ReadGraph::removeLowerBounds(int n){
 	for(int i = 0; i < n-2; ++i){
 		int L = 0;
 		for(int j = 0; j < n-2; ++j){
-			L += adjMatrix[i*n+j].first;
-			L -= adjMatrix[i*n+j].first;
+			L += adjMatrix[j*(2*numFlights+2)+i].first;
+			L -= adjMatrix[i*(2*numFlights+2)+j].first;
 		}
 		weights[i] = weights[i]-L;
 	}
 
 	for(int i = 0; i < n-2; ++i){
 		for(int j = 0; j < n-2; ++j){
-			adj[i*n+j] = adjMatrix[i*n+j].second - adjMatrix[i*n+j].first;
+			adj[i*n+j] = adjMatrix[i*(n-2)+j].second - adjMatrix[i*(n-2)+j].first;
 		}
 	}
-
 
 }
 
