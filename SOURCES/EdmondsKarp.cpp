@@ -1,7 +1,7 @@
 #include "EdmondsKarp.h"
 
 EdmondsKarp::EdmondsKarp(const Graph& graph):G(graph){
-	solve();
+	//solve();
 }
 
 EdmondsKarp::~EdmondsKarp(){}
@@ -16,10 +16,11 @@ bool EdmondsKarp::bfs(std::vector<int>& parent){
 	Q.push(s);
 	visited[s] = true;
 	parent[s] = -1;
+
+
 	while(not Q.empty()){
 		int u = Q.front();
 		Q.pop();
-
 		std::vector<EdgeId> neighbors = G.getVertexOutwardEdges(u);
 		std::vector<EdgeId> residual = G.getVertexInwardEdges(u);
 		for(unsigned int i = 0; i < neighbors.size(); ++i){
@@ -34,7 +35,7 @@ bool EdmondsKarp::bfs(std::vector<int>& parent){
 			}
 		}
 		for(unsigned int i = 0; i < residual.size(); ++i){
-			EdgeId e = neighbors[i];
+			EdgeId e = residual[i];
 			int v = G.getEdgeOrigin(e);
 			if(not visited[v]){
 				if(G.getEdgeFlow(e) > 0){
@@ -44,7 +45,6 @@ bool EdmondsKarp::bfs(std::vector<int>& parent){
 				}
 			}
 		}
-
 	}
 	return visited[G.getSink()];
 }
@@ -68,19 +68,21 @@ void EdmondsKarp::augment(std::vector<int>& parent){
 
 
 int EdmondsKarp::getBottleneck(std::vector<int>& parent){
-	int bottleneck = 0;
+	int bottleneck = std::numeric_limits<int>::max();
 	int v = G.getSink();
 	while(parent[v] != -1){
 		EdgeId bw = EdgeId(v,parent[v]);
 		EdgeId fw = EdgeId(parent[v],v);
 		int x;
 		if(G.edgeExists(fw)){
+			
 			x = G.getEdgeResidualFlow(fw);
 		}
 		else{
+			
 			x = G.getEdgeFlow(bw);
 		}
-		if(x > bottleneck) bottleneck = x;
+		if(x < bottleneck) bottleneck = x;
 		v = parent[v];
 	}
 	return bottleneck;
@@ -99,9 +101,11 @@ bool EdmondsKarp::isMaxFlow(){
 }
 
 void EdmondsKarp::solve(){
+	int i = 0;
 	std::vector<int> parent(G.getNumVertex());
-	while(bfs(parent)){
+	while(bfs(parent) && i < 10){
 		augment(parent);
+		++i;
 	}
 }
 

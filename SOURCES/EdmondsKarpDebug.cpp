@@ -17,7 +17,6 @@ int main(){
 	std::cin >> n >> source >> sink;
 	int mat[n*n];
 
-	std::cout << "asfkldslk" << std::endl;
 
 	readAdjMatrix(mat,n);
 
@@ -29,11 +28,31 @@ int main(){
 	}
 	Graph G = Graph(mat,n,source,sink);
 
-
-	std::cout << "aslkfdsdf"<< std::endl;
 	EdmondsKarp ek = EdmondsKarp(G);
 
+	ek.solve();
 
-	std::cout << ek.isMaxFlow();
+	std::cout << "resultado: " << ek.isMaxFlow() << std::endl;
 	Graph res = ek.getResult();
+	int vertices = res.getNumVertex();
+	int adjMatrix[vertices*vertices];
+	
+
+	res.getAdjacencyMatrix(adjMatrix);
+
+
+
+	for(int i = 0; i < vertices; ++i){
+		for(int j = 0; j < vertices; ++j){
+			if(adjMatrix[i*vertices+j] > 0){
+				EdgeId eid = EdgeId(j,i);
+				int flow = res.getEdgeFlow(eid);
+				std::cout << flow << ' ';
+			}
+			else{
+				std::cout << "0 ";
+			}
+		}
+		std::cout << std::endl;
+	}
 }

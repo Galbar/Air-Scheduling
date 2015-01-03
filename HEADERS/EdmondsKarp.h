@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <limits>
 #include "Graph.h"
 
 class EdmondsKarp{
@@ -12,10 +13,11 @@ public:
 
 	bool isMaxFlow();
 	const Graph& getResult();
+	void solve();
 
 private:
 	Graph G;
-	void solve();
+	
 	bool bfs(std::vector<int>& parent);
 	void augment(std::vector<int>& parent);
 	int getBottleneck(std::vector<int>& parent);

@@ -29,7 +29,7 @@ int main(){
 	}
 
 
-	int k = 2;
+	int k = 1;
 	int n = rd.getSize();
 
 	int x[n*n];

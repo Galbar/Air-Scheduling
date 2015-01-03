@@ -82,7 +82,10 @@ int ReadGraph::getSource(){
 }
 
 void ReadGraph::parametrize(int adj[], int k){
+
 	int n = 2*numFlights+4;
+
+	adjMatrix[pos(n-3,n-4,n-2)].second = k;
 	for(int i = 0; i < n*n; ++i){
 		adj[i] = 0;
 	}
@@ -92,6 +95,7 @@ void ReadGraph::parametrize(int adj[], int k){
 	
 	removeLowerBounds(adj,n);
 	removeWeights(adj,n);
+
 
 }
 
