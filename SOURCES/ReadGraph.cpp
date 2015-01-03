@@ -9,7 +9,7 @@ void ReadGraph::read(){
 	int r,d,t,l;
 	flights = std::vector<Flight>(0,Flight(0,0,0,0));
 	while(std::cin >> r >> d >> t >> l){
-		Flight f = Flight(r,d,t,l);
+		Flight f (r,d,t,l);
 		flights.push_back(f);
 	}
 	numFlights = flights.size();

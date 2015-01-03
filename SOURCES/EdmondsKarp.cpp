@@ -100,6 +100,14 @@ bool EdmondsKarp::isMaxFlow(){
 	return true;
 }
 
+
+bool EdmondsKarp::isMinimum(){
+	int source = G.getSource()-2;
+	int sink = G.getSink()-2;
+	if(G.getEdgeFlow(EdgeId(source,sink))>0) return false;
+	return true;
+}
+
 void EdmondsKarp::solve(){
 	int i = 0;
 	std::vector<int> parent(G.getNumVertex());

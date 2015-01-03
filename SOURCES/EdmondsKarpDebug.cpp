@@ -33,6 +33,7 @@ int main(){
 	ek.solve();
 
 	std::cout << "resultado: " << ek.isMaxFlow() << std::endl;
+	std::cout << "el resultado es minimo?: " << ek.isMinimum() << std::endl;
 	Graph res = ek.getResult();
 	int vertices = res.getNumVertex();
 	int adjMatrix[vertices*vertices];
