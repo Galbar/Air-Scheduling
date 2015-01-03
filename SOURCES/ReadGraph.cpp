@@ -59,11 +59,11 @@ const std::vector<Flight>& ReadGraph::getFlights(){
 int ReadGraph::getNumFlights(){
 	return numFlights;
 }
-
+/*
 const std::vector<int>& ReadGraph::getAdjMatrix(){
 	return adj;
 }
-
+*/
 
 const std::vector<constraints>& ReadGraph::getRawAdjMatrix(){
 	return adjMatrix;
@@ -81,21 +81,24 @@ int ReadGraph::getSource(){
 	return 2*numFlights+2;
 }
 
-void ReadGraph::parametrize(int k){
+void ReadGraph::parametrize(int adj[], int k){
+	int n = 2*numFlights+4;
+	for(int i = 0; i < n*n; ++i){
+		adj[i] = 0;
+	}
 	weights = std::vector<int>(2*numFlights+4,0);
 	weights[2*numFlights] = -k;
 	weights[2*numFlights+1] = k;
-	int n = 2*numFlights+4;
-	adj = std::vector<int>(n*n);
-	removeLowerBounds(n);
-	removeWeights(n);
+	
+	removeLowerBounds(adj,n);
+	removeWeights(adj,n);
 
 }
 
 
 
 
-void ReadGraph::removeLowerBounds(int n){
+void ReadGraph::removeLowerBounds(int adj[],int n){
 	for(int i = 0; i < n-2; ++i){
 		int L = 0;
 		for(int j = 0; j < n-2; ++j){
@@ -113,7 +116,7 @@ void ReadGraph::removeLowerBounds(int n){
 
 }
 
-void ReadGraph::removeWeights(int n){
+void ReadGraph::removeWeights(int adj[], int n){
 	for(int i = 0; i < n-2; ++i){
 		if(weights[i] > 0){
 			adj[i*n+n-1] = weights[i];

@@ -1,6 +1,7 @@
 #include "EdmondsKarp.h"
 
 EdmondsKarp::EdmondsKarp(const Graph& graph):G(graph){
+	ff();
 }
 
 EdmondsKarp::~EdmondsKarp(){}
