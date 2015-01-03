@@ -20,7 +20,7 @@ private:
 
 
 	void makeAdjMatrix();
-	inline int pos(int i,int j);
+	static inline int pos(int i,int j, int n);
 	void removeLowerBounds(int adj[], int n);
 	void removeWeights(int adj[], int n);
 

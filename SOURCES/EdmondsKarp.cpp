@@ -1,7 +1,7 @@
 #include "EdmondsKarp.h"
 
 EdmondsKarp::EdmondsKarp(const Graph& graph):G(graph){
-	ff();
+	solve();
 }
 
 EdmondsKarp::~EdmondsKarp(){}
@@ -98,7 +98,7 @@ bool EdmondsKarp::isMaxFlow(){
 	return true;
 }
 
-void EdmondsKarp::ff(){
+void EdmondsKarp::solve(){
 	std::vector<int> parent(G.getNumVertex());
 	while(bfs(parent)){
 		augment(parent);

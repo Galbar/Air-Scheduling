@@ -24,13 +24,13 @@ void ReadGraph::makeAdjMatrix(){
 
 
 	for(int i = 0; i < n-2; i+=2){
-		adjMatrix[pos(i,i+1)] = constraints(1,1);
+		adjMatrix[pos(i+1,i,n)] = constraints(1,1);
 	}
 	for(int i = 0; i < numFlights; ++i){
 		for(int j = 0; j < numFlights; ++j){
 			if(flights[i].getDestination() == flights[j].getOrigin()
 				and flights[i].getArrivalTime()+15 < flights[j].getTakeoffTime()){
-				adjMatrix[pos(2*i+1,2*j)] = constraints(0,1);
+				adjMatrix[pos(2*j,2*i+1,n)] = constraints(0,1);
 			}
 		}
 	}
@@ -38,16 +38,16 @@ void ReadGraph::makeAdjMatrix(){
 
 	for(int i = 0; i < n-2; i+=2){
 		
-		adjMatrix[pos(n-2,i)] = constraints(0,1);
+		adjMatrix[pos(i,n-2,n)] = constraints(0,1);
 	}
 	for(int i = 0; i < n-2; i+=2){
-		adjMatrix[pos(i+1,n-1)] = constraints(0,1);
+		adjMatrix[pos(n-1, i+1,n)] = constraints(0,1);
 
 	}
 }
 
-int ReadGraph::pos(int i, int j){
-	return (2*numFlights+2)*i+j;
+int ReadGraph::pos(int i, int j, int n){
+	return (n)*i+j;
 }
 
 
@@ -102,15 +102,15 @@ void ReadGraph::removeLowerBounds(int adj[],int n){
 	for(int i = 0; i < n-2; ++i){
 		int L = 0;
 		for(int j = 0; j < n-2; ++j){
-			L += adjMatrix[j*(2*numFlights+2)+i].first;
-			L -= adjMatrix[i*(2*numFlights+2)+j].first;
+			L += adjMatrix[pos(i,j,n-2)].first;
+			L -= adjMatrix[pos(j,i,n-2)].first;
 		}
 		weights[i] = weights[i]-L;
 	}
 
 	for(int i = 0; i < n-2; ++i){
 		for(int j = 0; j < n-2; ++j){
-			adj[i*n+j] = adjMatrix[i*(n-2)+j].second - adjMatrix[i*(n-2)+j].first;
+			adj[pos(j,i,n)] = adjMatrix[pos(j,i,n-2)].second - adjMatrix[pos(j,i,n-2)].first;
 		}
 	}
 
@@ -119,10 +119,10 @@ void ReadGraph::removeLowerBounds(int adj[],int n){
 void ReadGraph::removeWeights(int adj[], int n){
 	for(int i = 0; i < n-2; ++i){
 		if(weights[i] > 0){
-			adj[i*n+n-1] = weights[i];
+			adj[pos(n-1,i,n)] = weights[i];
 		}
 		else if(weights[i] < 0){
-			adj[(n-2)*n+i] = -weights[i];
+			adj[pos(i,n-2,n)] = -weights[i];
 		}
 	}
 }

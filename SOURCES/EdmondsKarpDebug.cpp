@@ -1,15 +1,11 @@
 #include "EdmondsKarp.h"
 
-int n, source, sink;
-std::vector<int> mat;
-
-void readAdjMatrix(){
-	std::cin >> n >> source >> sink;
 
 
-	mat = std::vector<int>(n*n);
+void readAdjMatrix(int adj[], int n){
+	
 	for(int i = 0; i < n*n; ++i){
-		std::cin >> mat[i];
+		std::cin >> adj[i];
 	}
 }
 
@@ -17,9 +13,27 @@ void readAdjMatrix(){
 
 
 int main(){
-	readAdjMatrix();
+	int n, source, sink;
+	std::cin >> n >> source >> sink;
+	int mat[n*n];
+
+	std::cout << "asfkldslk" << std::endl;
+
+	readAdjMatrix(mat,n);
+
+	for(int i = 0; i < n; ++i){
+		for(int j = 0; j < n; ++j){
+			std::cout << mat[i*n+j] << ' ';
+		}
+		std::cout << std::endl;
+	}
 	Graph G = Graph(mat,n,source,sink);
+
+
+	std::cout << "aslkfdsdf"<< std::endl;
 	EdmondsKarp ek = EdmondsKarp(G);
-	Graph res = EdmondsKarp.getResult();
-	
+
+
+	std::cout << ek.isMaxFlow();
+	Graph res = ek.getResult();
 }
