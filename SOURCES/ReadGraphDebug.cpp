@@ -4,7 +4,7 @@
 
 
 int main(){
-	ReadGraph rd = ReadGraph();
+	ReadGraph rd;
 	rd.read();
 	std::vector<Flight> f = rd.getFlights();
 
@@ -29,7 +29,7 @@ int main(){
 	}
 
 
-	int k = 1;
+	int k = 2;
 	int n = rd.getSize();
 
 	int x[n*n];

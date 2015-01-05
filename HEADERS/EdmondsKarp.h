@@ -12,6 +12,7 @@ public:
 	~EdmondsKarp();
 
 	bool isMaxFlow();
+	bool isMinimum();
 	const Graph& getResult();
 	void solve();
 
@@ -21,7 +22,6 @@ private:
 	bool bfs(std::vector<int>& parent);
 	void augment(std::vector<int>& parent);
 	int getBottleneck(std::vector<int>& parent);
-	
 
 };
 #endif

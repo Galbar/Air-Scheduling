@@ -9,7 +9,7 @@ void ReadGraph::read(){
 	int r,d,t,l;
 	flights = std::vector<Flight>(0,Flight(0,0,0,0));
 	while(std::cin >> r >> d >> t >> l){
-		Flight f = Flight(r,d,t,l);
+		Flight f (r,d,t,l);
 		flights.push_back(f);
 	}
 	numFlights = flights.size();
@@ -85,7 +85,6 @@ void ReadGraph::parametrize(int adj[], int k){
 
 	int n = 2*numFlights+4;
 
-	adjMatrix[pos(n-3,n-4,n-2)].second = k;
 	for(int i = 0; i < n*n; ++i){
 		adj[i] = 0;
 	}
