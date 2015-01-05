@@ -16,7 +16,15 @@ bool FordFulkerson::findPath(int src, std::vector<int>& parent){
     {
         for (EdgeId eId : G.getVertexOutwardEdges(src))
         {
-            if (G.getEdgeResidualFlow(eId) <= 0) continue;
+            if (G.getEdgeFlow(eId) > 0) continue;
+            parent[G.getEdgeDestination(eId)] = G.getEdgeOrigin(eId);
+            if (findPath(eId.second, parent))
+                return true;
+            parent[G.getEdgeDestination(eId)] = -1;
+        }
+        for (EdgeId eId : G.getVertexInwardEdges(src))
+        {
+            if (G.getEdgeResidualFlow(eId) > 0) continue;
             parent[G.getEdgeDestination(eId)] = G.getEdgeOrigin(eId);
             if (findPath(eId.second, parent))
                 return true;

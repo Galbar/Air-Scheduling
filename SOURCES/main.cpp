@@ -72,7 +72,6 @@ int main ()
 
 	ReadGraph rg;
 	rg.read();
-	int k = rg.getNumFlights();
 	int res = search(rg);
 
 
