@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "Graph.h"
 #include "Flight.h"
 #include "FlightEdgeDict.h"
@@ -27,6 +28,7 @@ private:
 public:
 	ReadGraph();
 	void read();
+	void readFromFile(std::string path);
 
 
 	const std::vector<Flight>& getFlights();
