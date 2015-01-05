@@ -17,7 +17,6 @@ int main(){
 	std::cin >> n >> source >> sink;
 	int mat[n*n];
 
-
 	readAdjMatrix(mat,n);
 
 	for(int i = 0; i < n; ++i){
@@ -27,7 +26,7 @@ int main(){
 		std::cout << std::endl;
 	}
 	Graph G = Graph(mat,n,source,sink);
-
+	std::cout << G.getNumVertex() << std::endl;
 	EdmondsKarp ek = EdmondsKarp(G);
 
 	ek.solve();
