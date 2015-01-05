@@ -11,18 +11,19 @@ typedef std::pair<int, int> EdgeId;
 class FlightEdgeDict
 {
 private:
-	std::vector<Flight> flights;
-	std::unordered_map<EdgeId, int> edgeToFlight;
-	std::vector<std::vector<EdgeId>> flightToEdges;
+    std::vector<Flight> flights;
+    std::unordered_map<EdgeId, int> edgeToFlight;
+    std::vector<std::vector<EdgeId>> flightToEdges;
 
 public:
-	FlightEdgeDict (const std::vector<Flight>& flights);
-	~FlightEdgeDict ();
-	void addEdgeToFlight (int flightId, const EdgeId& eId);
-	int getFlightByEdge (const EdgeId& eId);
-	const std::vector<EdgeId>& getEdgesByFlight (int id) const;
-	const Flight& getFlight (int id) const;
-	bool isFlight (const EdgeId& eId) const;
-	
+    FlightEdgeDict (const std::vector<Flight>& flights);
+    ~FlightEdgeDict ();
+
+    void addEdgeToFlight (int flightId, const EdgeId& eId);
+    int getFlightByEdge (const EdgeId& eId);
+    const std::vector<EdgeId>& getEdgesByFlight (int id) const;
+    const Flight& getFlight (int id) const;
+    bool isFlight (const EdgeId& eId) const;
+    
 };
 #endif
