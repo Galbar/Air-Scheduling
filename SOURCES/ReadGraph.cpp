@@ -16,6 +16,22 @@ void ReadGraph::read(){
 	makeAdjMatrix();
 }
 
+
+void ReadGraph::readFromFile(std::string path){
+	std::ifstream infile(path);
+    infile.open(path);
+
+    	int r,d,t,l;
+		flights = std::vector<Flight>(0,Flight(0,0,0,0));
+		while(std::cin >> r >> d >> t >> l){
+			Flight f (r,d,t,l);
+			flights.push_back(f);
+		}
+		numFlights = flights.size();
+		makeAdjMatrix();
+
+}
+
 void ReadGraph::makeAdjMatrix(){
 	int n = 2*numFlights+2;
 	adjMatrix=std::vector<constraints>((n)*(n),std::make_pair(0,0));
