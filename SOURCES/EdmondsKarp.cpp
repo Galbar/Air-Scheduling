@@ -17,8 +17,8 @@ bool EdmondsKarp::bfs(std::vector<int>& parent){
 	visited[s] = true;
 	parent[s] = -1;
 
-
 	while(not Q.empty()){
+		
 		int u = Q.front();
 		Q.pop();
 		std::vector<EdgeId> neighbors = G.getVertexOutwardEdges(u);
@@ -111,7 +111,7 @@ bool EdmondsKarp::isMinimum(){
 void EdmondsKarp::solve(){
 	int i = 0;
 	std::vector<int> parent(G.getNumVertex());
-	while(bfs(parent) && i < 10){
+	while(bfs(parent)){
 		augment(parent);
 		++i;
 	}

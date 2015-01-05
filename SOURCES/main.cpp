@@ -10,6 +10,10 @@ int binarySearch(ReadGraph& rg, int i, int j){
         int mat[n*n];
 
 		rg.parametrize(mat,k);
+
+
+
+
 		int source = rg.getSource();
 		int sink = rg.getSink();
 		Graph G = Graph(mat,n,source,sink);
@@ -32,16 +36,45 @@ int binarySearch(ReadGraph& rg, int i, int j){
 }
 
 
+
+int search(ReadGraph& rg){
+	int n = rg.getSize();
+	for(int k = 1; k <= rg.getNumFlights(); ++k){
+
+
+
+		
+
+        int mat[n*n];
+
+		rg.parametrize(mat,k);
+
+
+		int source = rg.getSource();
+		int sink = rg.getSink();
+		Graph G = Graph(mat,n,source,sink);
+		EdmondsKarp ek = EdmondsKarp(G);
+		ek.solve();
+
+
+
+		if(ek.isMaxFlow()) return k;
+	}
+	return -1;
+
+}
 	
 
 
 
 int main ()
 {
+
 	ReadGraph rg;
 	rg.read();
 	int k = rg.getNumFlights();
-	int res = binarySearch(rg, 1, k);
+	int res = search(rg);
+
 
 	std::cout << res << std::endl;
     return 0;
