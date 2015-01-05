@@ -66,7 +66,6 @@ int main (int argc, char* argv[])
 	}
 	
 	int f = rg.getNumFlights();
-	std::cout << f << std::endl;
 
 
 //binary search

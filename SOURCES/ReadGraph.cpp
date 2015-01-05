@@ -18,17 +18,22 @@ void ReadGraph::read(){
 
 
 void ReadGraph::readFromFile(std::string path){
-	std::ifstream infile(path);
+	std::ifstream infile;
     infile.open(path);
-
+    if(infile.good()){
     	int r,d,t,l;
 		flights = std::vector<Flight>(0,Flight(0,0,0,0));
-		while(std::cin >> r >> d >> t >> l){
+		while(infile >> r >> d >> t >> l){
 			Flight f (r,d,t,l);
 			flights.push_back(f);
 		}
 		numFlights = flights.size();
 		makeAdjMatrix();
+	}
+	else{
+		std::cout << "bad input file"<< std::endl;
+		exit(0);
+	}
 
 }
 
