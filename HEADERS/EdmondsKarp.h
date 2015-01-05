@@ -1,27 +1,14 @@
 #ifndef EDMONDSKARP_H
 #define EDMONDSKARP_H
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <limits>
-#include "Graph.h"
+#include "FordFulkerson.h"
 
-class EdmondsKarp{
+class EdmondsKarp: public FordFulkerson{
 public:
 	EdmondsKarp(const Graph& graph);
 	~EdmondsKarp();
 
-	bool isMaxFlow();
-	bool isMinimum();
-	const Graph& getResult();
-	void solve();
-
 private:
-	Graph G;
-	
-	bool bfs(std::vector<int>& parent);
-	void augment(std::vector<int>& parent);
-	int getBottleneck(std::vector<int>& parent);
+	virtual bool findPath(std::vector<int>& parent);
 
 };
 #endif

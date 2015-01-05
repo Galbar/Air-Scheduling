@@ -9,7 +9,7 @@ void writeResult(Graph& G, std::vector<Flight>& flights, bool file, char* outfil
 	WriteResult wr(G, fed);
 	wr.process();
 	if(file){
-		wr.writeToFile(outfile);
+		wr.writeToFile(std::string(outfile));
 	}
 	else{
 		wr.print();
@@ -28,7 +28,6 @@ int main (int argc, char* argv[])
 	bool isfilein = false;
 	if (argc == 2 or argc == 4 or argc > 5) {
         std::cout << "Usage is [-i <infile>][-o <outfile>]" << std::endl;
-        std::cin.get();
         exit(0);
     }
     else if(argc == 3 or argc == 5){
@@ -96,7 +95,7 @@ int main (int argc, char* argv[])
         {
         	if(k == i){
         		Graph g = ek.getResult();
-        		//writeResult(g,flights,isfileout,outfile);
+        		writeResult(g,flights,isfileout,outfile);
         		std::cout << k << std::endl;
         		break;
         		
