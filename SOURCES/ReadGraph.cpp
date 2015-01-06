@@ -14,6 +14,7 @@ void ReadGraph::read(){
 	}
 	numFlights = flights.size();
 	makeAdjMatrix();
+
 }
 
 
@@ -102,7 +103,7 @@ int ReadGraph::getSource(){
 	return 2*numFlights+2;
 }
 
-void ReadGraph::parametrize(int adj[], int k){
+void ReadGraph::parametrize(int adj[]){
 
 	int n = 2*numFlights+4;
 
@@ -110,15 +111,18 @@ void ReadGraph::parametrize(int adj[], int k){
 		adj[i] = 0;
 	}
 	weights = std::vector<int>(2*numFlights+4,0);
-	weights[2*numFlights] = -k;
-	weights[2*numFlights+1] = k;
+	weights[2*numFlights] = -1;
+	weights[2*numFlights+1] = 1;
 	
 	removeLowerBounds(adj,n);
 	removeWeights(adj,n);
 
 
 }
-
+void ReadGraph::reallyParametrize(int adj[], int k, int n){
+	adj[pos(n-4,n-2,n)] = k;
+	adj[pos(n-3,n-2,n)] = k;
+}
 
 
 

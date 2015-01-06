@@ -40,5 +40,6 @@ public:
 	int getNumFlights();
 
 
-	void parametrize(int adj[], int k);
+	void parametrize(int adj[]);
+	void reallyParametrize(int adj[], int k, int n);
 };

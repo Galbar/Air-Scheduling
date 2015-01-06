@@ -73,12 +73,15 @@ int main (int argc, char* argv[])
 	int i, j;
 	i = 1;
 	j = f;
+
+	int mat[n*n];
+
+	rg.parametrize(mat);
+
 	while(not(i > j)){
         int k = (i+j)/2;
 
-        int mat[n*n];
-
-		rg.parametrize(mat,k);
+        rg.reallyParametrize(mat,k,n);
 
 
 		std::vector<Flight> flights = rg.getFlights();
@@ -95,7 +98,7 @@ int main (int argc, char* argv[])
         {
         	if(k == i){
         		Graph g = ek.getResult();
-        		writeResult(g,flights,isfileout,outfile);
+        		//writeResult(g,flights,isfileout,outfile);
         		std::cout << k << std::endl;
         		break;
         		
