@@ -58,6 +58,7 @@ void WriteResult::process(int src, int sink, std::vector<int>& route)
                 {
                     is_origin_of_flight = true;
                     std::cerr << "(tiene flujo)";
+                    std::cerr << std::endl << "el flight: " << dict.getFlightByEdge(eId);
                     route.push_back(dict.getFlightByEdge(eId));
                     std::cerr << "llamada recursiva de vertice " << src << std::endl;
                     process(vertex, sink, route);
@@ -73,9 +74,16 @@ void WriteResult::process(int src, int sink, std::vector<int>& route)
             std::cerr << "no es origen de vuelo" << std::endl;    
             for(EdgeId eId : gr.getVertexOutwardEdges(src))
             {
-                std::cerr << "llamada recursiva para arco: " << eId.first << "->" << eId.second << std::endl;
-                process(gr.getEdgeDestination(eId), sink, route);
-                std::cerr << "vuelve llamada recursiva para arco: " << eId.first << "->" << eId.second << std::endl;
+                std::cerr << "el eid es" << std::endl;
+                std::cerr << eId.first << ' ' << eId.second << std::endl;
+
+                if(gr.getEdgeFlow(eId)>0){
+                    std::cerr << "llamada recursiva para arco: " << eId.first << "->" << eId.second << std::endl;
+
+                    process(gr.getEdgeDestination(eId), sink, route);
+                    std::cerr << "vuelve llamada recursiva para arco: " << eId.first << "->" << eId.second << std::endl;
+
+                }
 
             }
         }
@@ -106,14 +114,15 @@ bool WriteResult::writeToFile(std::string path) const
 
 void WriteResult::print() const
 {
-    std::cout << pilot_routes.size() << std::endl;
+    std::cout << "the routes" << std::endl;
+    //std::cout << pilot_routes.size() << std::endl;
     for (unsigned int i = 0; i < pilot_routes.size(); ++i)
     {
         for (unsigned int j = 0; j < pilot_routes[i].size(); ++j)
         {
             if (j != 0)
                 std::cout << " ";
-            std::cout << pilot_routes[i][j];
+            std::cout << pilot_routes[i][j]+1;
         }
         std::cout << std::endl;
     }

@@ -43,5 +43,6 @@ public:
 
 
 	void parametrize(int adj[]);
+	void parametrize(int adj[], int k);
 	void reallyParametrize(int adj[], int k, int n);
 };

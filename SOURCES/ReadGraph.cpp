@@ -122,7 +122,7 @@ void ReadGraph::parametrize(int adj[]){
 }
 void ReadGraph::reallyParametrize(int adj[], int k, int n){
 	adj[pos(n-4,n-2,n)] = k;
-	adj[pos(n-3,n-2,n)] = k;
+	adj[pos(n-1,n-3,n)] = k;
 }
 
 
