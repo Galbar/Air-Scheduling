@@ -81,16 +81,7 @@ int main (int argc, char* argv[])
 
 //binary search
 
-    int n = rg.getSize();
-    int i, j;
-    i = 1;
-    j = f;
 
-    int mat[n*n];
-
-    
-    rg.parametrize(mat);
-    
 
     while(not(i > j)){
         int k = (i+j)/2;
