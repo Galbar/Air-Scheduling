@@ -112,7 +112,7 @@ int main (int argc, char* argv[])
                 int m[(n-2)*(n-2)];
                 rg.getUpperBoundsRawAdjMatrix(m);
                 Graph G = Graph(m,n-2,source-2,sink-2);
-                writeResult(G, g, fed, isfileout, outfile);
+                //writeResult(G, g, fed, isfileout, outfile);
                 std::cout << k << std::endl;
                 break;
                 
