@@ -105,7 +105,7 @@ int Graph::getNumEdges () const
     return edges.size();
 }
 
-void Graph::getAdjacencyMatrix(int mat[])
+void Graph::getAdjacencyMatrix(int mat[]) const
 {
     int size = getNumVertex();
     for (int i = 0; i < size; ++i)
