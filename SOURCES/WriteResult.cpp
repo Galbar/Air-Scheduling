@@ -25,7 +25,7 @@ void WriteResult::process()
 
 void WriteResult::process(int src, int sink, std::vector<int>& route)
 {
-    if (src == sink)
+    if (src >= sink)
     {
         std::cerr << "caso base" << std::endl;
 

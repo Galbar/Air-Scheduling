@@ -4,8 +4,8 @@
 #include "WriteResult.h"
 
 
-void writeResult(Graph& Go, Graph& Gr, std::vector<Flight>& flights, bool file, char* outfile){
-    FlightEdgeDict fed(flights);
+void writeResult(Graph& Go, Graph& Gr, FlightEdgeDict& fed, bool file, char* outfile){
+    
     WriteResult wr(Go, Gr, fed);
     wr.process();
     if(file){
@@ -86,6 +86,8 @@ int main (int argc, char* argv[])
 
 
         std::vector<Flight> flights = rg.getFlights();
+        FlightEdgeDict fed(flights);
+        rg.makeFED(fed);
 
         int source = rg.getSource();
         int sink = rg.getSink();
@@ -104,7 +106,7 @@ int main (int argc, char* argv[])
                 int m[(n-2)*(n-2)];
                 rg.getUpperBoundsRawAdjMatrix(m);
                 Graph G = Graph(m,n-2,source-2,sink-2);
-                writeResult(G, g, flights, isfileout, outfile);
+                writeResult(G, g, fed, isfileout, outfile);
                 std::cout << k << std::endl;
                 break;
                 
