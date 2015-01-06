@@ -155,3 +155,9 @@ void ReadGraph::removeWeights(int adj[], int n){
 		}
 	}
 }
+
+void ReadGraph::makeFED(FlightEdgeDict& fed){
+	for(int i = 0;i < numFlights; ++i){
+		fed.addEdgeToFlight(i,EdgeId(2*i,2*i+1));
+	}
+}

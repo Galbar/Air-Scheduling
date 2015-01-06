@@ -39,6 +39,7 @@ public:
 	int getSource();
 	int getSink();
 	int getNumFlights();
+	void makeFED(FlightEdgeDict& fed);
 
 
 	void parametrize(int adj[]);
