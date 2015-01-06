@@ -45,7 +45,7 @@ public:
     int getSink() const;
     int getNumVertex() const;
     int getNumEdges() const;
-    void getAdjacencyMatrix(int mat[]);
+    void getAdjacencyMatrix(int mat[]) const;
     bool edgeExists(const EdgeId& eId) const;
 };
 #endif
