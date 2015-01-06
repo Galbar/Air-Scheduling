@@ -68,6 +68,17 @@ int main (int argc, char* argv[])
     int f = rg.getNumFlights();
 
 
+    int n = rg.getSize();
+    int i, j;
+    i = 1;
+    j = f;
+
+    int mat[n*n];
+
+    
+    rg.parametrize(mat);
+    
+
 //binary search
 
     int n = rg.getSize();
@@ -110,17 +121,6 @@ int main (int argc, char* argv[])
                 int m[(n-2)*(n-2)];
                 rg.getUpperBoundsRawAdjMatrix(m);
                 Graph G = Graph(m,n-2,source-2,sink-2);
-                for(int i = 0; i < n; ++i){
-                    for(int j = 0; j < n; ++j){
-                        if(g.edgeExists(EdgeId(j,i))){
-                            std::cout << g.getEdgeFlow(EdgeId(j,i)) << ' ';
-                        }
-                        else{
-                            std::cout << "0 ";
-                        }
-                    }
-                    std::cout << std::endl;
-                }
                 writeResult(G, g, fed, isfileout, outfile);
                 std::cout << k << std::endl;
                 break;
