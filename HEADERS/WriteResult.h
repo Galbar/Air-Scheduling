@@ -8,15 +8,14 @@
 class WriteResult
 {
 private:
-    Graph graph;
+    Graph go, gr;
     FlightEdgeDict dict;
-    int opt_num_pilot;
     std::vector<std::vector<int>> pilot_routes;
 
-    void process(int src, std::vector<int>& route);
+    void process(int src, int sink, std::vector<int>& route);
 
 public:
-    WriteResult(const Graph& graph, const FlightEdgeDict& dict);
+    WriteResult(const Graph& graphOriginal, const Graph& graphResult, const FlightEdgeDict& dict);
     ~WriteResult();
     
     void process();

@@ -105,9 +105,11 @@ bool FordFulkerson::isMinimum(){
 }
 
 void FordFulkerson::solve(){
+    int i = 0;
     std::vector<int> parent(G.getNumVertex(), -1);
     while(findPath(parent)){
         augment(parent);
+		++i;
 	}
 }
 

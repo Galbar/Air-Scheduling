@@ -21,8 +21,9 @@ void ReadGraph::read(){
 void ReadGraph::readFromFile(std::string path){
 	std::ifstream infile;
     infile.open(path);
-    if(infile.good()){
-    	int r,d,t,l;
+
+    int r,d,t,l;
+    if (infile.good()){
 		flights = std::vector<Flight>(0,Flight(0,0,0,0));
 		while(infile >> r >> d >> t >> l){
 			Flight f (r,d,t,l);
@@ -32,10 +33,8 @@ void ReadGraph::readFromFile(std::string path){
 		makeAdjMatrix();
 	}
 	else{
-		std::cout << "bad input file"<< std::endl;
-		exit(0);
+		std::cerr << "Error opening file " << path << std::endl;
 	}
-
 }
 
 void ReadGraph::makeAdjMatrix(){
@@ -81,11 +80,6 @@ const std::vector<Flight>& ReadGraph::getFlights(){
 int ReadGraph::getNumFlights(){
 	return numFlights;
 }
-/*
-const std::vector<int>& ReadGraph::getAdjMatrix(){
-	return adj;
-}
-*/
 
 const std::vector<constraints>& ReadGraph::getRawAdjMatrix(){
 	return adjMatrix;
