@@ -101,9 +101,9 @@ int main (int argc, char* argv[])
         {
             if(k == i){
                 Graph g = ek.getResult();
-                int m[n*n];
+                int m[(n-2)*(n-2)];
                 rg.getUpperBoundsRawAdjMatrix(m);
-                Graph G = Graph(m,n,source,sink);
+                Graph G = Graph(m,n-2,source-2,sink-2);
                 writeResult(G, g, flights, isfileout, outfile);
                 std::cout << k << std::endl;
                 break;

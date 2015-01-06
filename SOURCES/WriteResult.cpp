@@ -18,6 +18,8 @@ void WriteResult::process()
     // int src = gr.getEdgeDestination(e);
     // e = gr.getVertexInwardEdges(gr.getSink())[0];
     // int sink = gr.getEdgeOrigin(e);
+    std::cerr << "Source: " << go.getSource() << std::endl;
+    std::cerr << "Sink: " << go.getSink() << std::endl;
     process(go.getSource(), go.getSink(), v);
 }
 
@@ -25,6 +27,8 @@ void WriteResult::process(int src, int sink, std::vector<int>& route)
 {
     if (src == sink)
     {
+        std::cerr << "caso base" << std::endl;
+
         if (route.size() != 0)
             pilot_routes.push_back(route);
     }
@@ -32,11 +36,17 @@ void WriteResult::process(int src, int sink, std::vector<int>& route)
     {
         bool is_origin_of_flight = false;
         // mirar si es origen y si lo es tratarlo
-        for (EdgeId eId : go.getVertexOutwardEdges(src))
+        std::cerr << "no es caso base:" << std::endl;    
+        const std::vector<EdgeId>& v = go.getVertexOutwardEdges(src);
+        std::cerr << "es origen?" << std::endl;    
+        for (int i = 0; i < v.size(); ++i)
         {
+            std::cerr << "vecino #" << i << "/" << v.size() <<  std::endl;
+            EdgeId eId = v[i];
+            std::cerr << "Probando edge: " << eId.first << "->" << eId.second << std::endl;
             if (dict.isFlight(eId))
             {
-                std::cout << "isFlight";
+                std::cerr << "vuelo encontrado";
                 int vertex = go.getEdgeDestination(eId);
                 bool is_flow = false;
                 for (EdgeId e : gr.getVertexInwardEdges(vertex))
@@ -47,20 +57,26 @@ void WriteResult::process(int src, int sink, std::vector<int>& route)
                 if (is_flow)
                 {
                     is_origin_of_flight = true;
-                    std::cout << "(active)";
+                    std::cerr << "(tiene flujo)";
                     route.push_back(dict.getFlightByEdge(eId));
+                    std::cerr << "llamada recursiva de vertice " << src << std::endl;
                     process(vertex, sink, route);
+                    std::cerr << "vuelve llamada recursiva de vertice " << src << std::endl;
                     route.pop_back();
                 }
-                std::cout << std::endl;
+                std::cerr << std::endl;
             }
         }
         // si no es origen de viaje, seguir por gr
         if (not is_origin_of_flight)
         {
+            std::cerr << "no es origen de vuelo" << std::endl;    
             for(EdgeId eId : gr.getVertexOutwardEdges(src))
             {
+                std::cerr << "llamada recursiva para arco: " << eId.first << "->" << eId.second << std::endl;
                 process(gr.getEdgeDestination(eId), sink, route);
+                std::cerr << "vuelve llamada recursiva para arco: " << eId.first << "->" << eId.second << std::endl;
+
             }
         }
     }
