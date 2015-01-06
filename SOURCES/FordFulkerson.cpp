@@ -1,4 +1,3 @@
-#include <iostream>
 #include "FordFulkerson.h"
 
 FordFulkerson::FordFulkerson(const Graph& graph):G(graph){
@@ -7,7 +6,8 @@ FordFulkerson::FordFulkerson(const Graph& graph):G(graph){
 
 FordFulkerson::~FordFulkerson(){}
 
-bool FordFulkerson::findPath(int src, std::vector<int>& parent){
+// No funciona :'(
+bool FordFulkerson::findPath(int src, std::vector<int>& parent, std::vector<bool>& visited){
     if (src == G.getSink())
     {
         return true;
@@ -16,18 +16,22 @@ bool FordFulkerson::findPath(int src, std::vector<int>& parent){
     {
         for (EdgeId eId : G.getVertexOutwardEdges(src))
         {
-            if (G.getEdgeFlow(eId) > 0) continue;
+            if (G.getEdgeFlow(eId) > 0 or visited[G.getEdgeDestination(eId)]) continue;
             parent[G.getEdgeDestination(eId)] = G.getEdgeOrigin(eId);
-            if (findPath(eId.second, parent))
+            visited[G.getEdgeDestination(eId)] = true;
+            if (findPath(G.getEdgeDestination(eId), parent, visited))
                 return true;
+            visited[G.getEdgeDestination(eId)] = false;
             parent[G.getEdgeDestination(eId)] = -1;
         }
         for (EdgeId eId : G.getVertexInwardEdges(src))
         {
-            if (G.getEdgeResidualFlow(eId) > 0) continue;
+            if (G.getEdgeResidualFlow(eId) > 0 or visited[G.getEdgeDestination(eId)]) continue;
             parent[G.getEdgeDestination(eId)] = G.getEdgeOrigin(eId);
-            if (findPath(eId.second, parent))
+            visited[G.getEdgeDestination(eId)] = true;
+            if (findPath(G.getEdgeDestination(eId), parent, visited))
                 return true;
+            visited[G.getEdgeDestination(eId)] = false;
             parent[G.getEdgeDestination(eId)] = -1;
         }
         return false;
@@ -36,12 +40,8 @@ bool FordFulkerson::findPath(int src, std::vector<int>& parent){
 
 bool FordFulkerson::findPath(std::vector<int>& parent){
 	int s = G.getSource();
-    bool b = findPath(s, parent);/*
-    for (int i = 0; i < parent.size(); ++i)
-    {
-        std::cout << parent[i] << " ";
-    }
-    std::cout << std::endl;*/
+	std::vector<bool> visited = std::vector<bool>(G.getNumVertex(), false);
+    bool b = findPath(s, parent, visited);
     return b;
 }
 
