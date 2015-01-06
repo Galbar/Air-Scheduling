@@ -50,7 +50,7 @@ void ReadGraph::makeAdjMatrix(){
 	for(int i = 0; i < numFlights; ++i){
 		for(int j = 0; j < numFlights; ++j){
 			if(flights[i].getDestination() == flights[j].getOrigin()
-				and flights[i].getArrivalTime()+15 < flights[j].getTakeoffTime()){
+				and flights[i].getArrivalTime()+15 <= flights[j].getTakeoffTime()){
 				adjMatrix[pos(2*j,2*i+1,n)] = constraints(0,1);
 			}
 		}
