@@ -8,7 +8,7 @@
 class FordFulkerson{
 public:
 	FordFulkerson(const Graph& graph);
-	~FordFulkerson();
+	virtual ~FordFulkerson();
 
 	bool isMaxFlow();
 	bool isMinimum();
