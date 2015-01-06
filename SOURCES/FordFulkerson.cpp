@@ -107,21 +107,6 @@ bool FordFulkerson::isMinimum(){
 void FordFulkerson::solve(){
     std::vector<int> parent(G.getNumVertex(), -1);
     while(findPath(parent)){
-    	int n = G.getNumVertex();
-    	for(int i = 0; i < n; ++i){
-    		for(int j = 0; j <n; ++j){
-    			EdgeId eid(j,i);
-    			if(G.edgeExists(eid)){
-                    std::cout << G.getEdgeFlow(eid) << ' ';
-                }
-                else{
-                    std::cout << "0 ";
-                }
-
-    		}
-    		std::cout << std::endl;
-    	}
-        std::cout << std::endl;
         augment(parent);
 	}
 }
