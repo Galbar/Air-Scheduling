@@ -92,7 +92,9 @@ int main (int argc, char* argv[])
 		EdmondsKarp ek = EdmondsKarp(G);
 
 		ek.solve();
-		
+
+
+
  
         if(ek.isMaxFlow())
         {

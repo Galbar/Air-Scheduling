@@ -31,6 +31,7 @@ public:
 	void readFromFile(std::string path);
 
 
+	void getUpperBoundsRawAdjMatrix(int adj[]);
 	const std::vector<Flight>& getFlights();
 /*	const std::vector<int>& getAdjMatrix();*/
 	const std::vector<constraints>& getRawAdjMatrix();

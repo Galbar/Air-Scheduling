@@ -91,6 +91,13 @@ const std::vector<constraints>& ReadGraph::getRawAdjMatrix(){
 	return adjMatrix;
 }
 
+
+void ReadGraph::getUpperBoundsRawAdjMatrix(int adj[]){
+	for(int i = 0; i < (2*numFlights+2)*(2*numFlights+2);++i){
+		adj[i] = adjMatrix[i].second;
+	}
+}
+
 int ReadGraph::getSize(){
 	return 2*numFlights+4;
 }
